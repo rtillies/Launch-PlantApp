@@ -18,7 +18,13 @@ class Program
                 Name = "Kitchen",
                 HasSunlight = "true"
             };
+            var bedroom = new Room
+            {
+                Name = "Bedroom",
+                HasSunlight = "true"
+            };
             context.Rooms.Add(kitchen);
+            context.Rooms.Add(bedroom);
             context.SaveChanges();
         }
     }
