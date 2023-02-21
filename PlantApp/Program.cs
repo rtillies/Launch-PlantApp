@@ -30,7 +30,6 @@ class Program
         
 
         // READ operation
-            // var rooms = from r in context.Rooms select r;
             foreach (var room in context.Rooms)
             {
                 Console.WriteLine($"Room {room.Id}," +
