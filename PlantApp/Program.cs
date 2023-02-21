@@ -10,6 +10,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        // CREATE operation
         using (var context = new PlantTrackerContext())
         {
             // CREATE: Add Rooms
@@ -26,24 +27,22 @@ class Program
             context.Rooms.Add(kitchen);
             context.Rooms.Add(bedroom);
             context.SaveChanges();
+        
 
-            /*            // CREATE: Add Plants
-                        var pothos = new Plant
-                        {
-                            Type = "Pothos",
-                            PurchaseDate = new DateTime(2023, 2, 14, 12, 0, 0),
-                            Room = kitchen
-                        };
-                        context.Plants.Add(pothos);
-                        context.SaveChanges();
-            */
-            
-        }
+        // READ operation
+            // var rooms = from r in context.Rooms select r;
+            foreach (var room in context.Rooms)
+            {
+                Console.WriteLine($"Room {room.Id}," +
+                    $" Name: {room.Name}," +
+                    $" Has Sunlight? {room.HasSunlight}");
+            }
 
-        using (var context = new PlantTrackerContext())
-        {
-            var rooms = from r in context.Rooms select r;
-            foreach (var room in rooms)
+        // UPDATE operation, then read the change in the database
+            bedroom.HasSunlight = "false";
+            context.SaveChanges();
+
+            foreach (var room in context.Rooms)
             {
                 Console.WriteLine($"Room {room.Id}," +
                     $" Name: {room.Name}," +
